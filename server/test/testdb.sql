@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS Users(
+    user_id INT NOT NULL AUTO_INCREMENT,\
+    username TEXT NOT NULL,\
+    bio TEXT NULL,\
+    profile_pic TEXT NULL,\
+    date_joined TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\
+    PRIMARY KEY(user_id)
+)
+
+CREATE TABLE IF NOT EXISTS Posts(
+    id INT NOT NULL AUTO_INCREMENT,\
+    title TEXT NOT NULL,\
+    author_id INT,\
+    content TEXT NOT NULL,\
+    meta_data VARCHAR(250) NOT NULL,\
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+    PRIMARY KEY (id),\
+    INDEX auth_id (author_id),\
+    FOREIGN KEY (author_id) REFERENCES Users(user_id) ON DELETE CASCADE)
